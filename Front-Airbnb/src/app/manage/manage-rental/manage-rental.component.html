@@ -1,0 +1,46 @@
+<section id="userRentals">
+  <h1 class="page-title">My Rentals</h1>
+  <div class="row">
+    <ng-container *ngIf="manageRentals && manageRentals.length>0">
+      <!-- Check for rentals length -->
+      <div class="col-md-4" *ngFor="let rentals of manageRentals let i= index">
+        <!-- Iterate Rentals -->
+        <div class="card text-center">
+          <div class="card-block">
+            <h4 class="card-title">{{rentals.title}} - {{rentals.city | ucwords}}</h4>
+            <!-- Rental Title - Rental City -->
+            <a class="btn btn-ghost" routerLink="/rentals/{{rentals._id}}">Go to Rental</a>
+            <span *ngIf="rentals.bookings.length>0">
+              <!-- Check for rental bookings length -->
+              <app-manage-rental-booking [bookings]="rentals.bookings"></app-manage-rental-booking>
+            </span>
+          </div>
+          <div class="card-footer text-muted">
+            <p>Created at {{rentals.createAt | formatDate}}</p> <!-- Created At -->
+
+            <button (click)="rentalDeleteIndex = i" *ngIf="rentalDeleteIndex !== i" type="button"
+              class="btn btn-bwm btn-delete">Delete</button> <!-- Delete Rental Button -->
+
+            <a class="btn btn-edit btn-warning" routerLink="/rentals/{{rentals._id}}/edit">Edit</a>
+            <div *ngIf="rentalDeleteIndex === i">
+              <p class="confirm-message" >
+                Do you confirm to delete?
+                <button class="btn btn-success" (click)="deleteRental(rentals._id)">Yes</button>
+                <button (click)="rentalDeleteIndex=undefined" class="btn btn-danger">No</button>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="col-md-8" *ngIf="manageRentals && manageRentals.length===0">
+      <!-- Check if rentals length === 0 -->
+      <div class="alert alert-warning">
+        You dont have any rentals currenty created. If you want advertised your property
+        please follow this link.
+        <a class="btn btn-bwm" routerLink="/rentals/new">Register Rental</a> <!-- Link to rentals/new -->
+      </div>
+    </div>
+  </div>
+</section>

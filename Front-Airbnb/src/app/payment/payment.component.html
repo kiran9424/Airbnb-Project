@@ -1,0 +1,27 @@
+<form [ngClass]="isValidating?'loading':''">
+    <img class="img-responsive spinner"*ngIf="isValidating"src="https://thumbs.gfycat.com/LoneDetailedFairybluebird-max-1mb.gif" alt="spinner">
+    <div class="group">
+        <label>
+            <span>Card Number</span>
+            <div #cardNumber class="field"></div>
+        </label>
+        <label>
+            <span>Exipry Date</span>
+            <div #cardExp class="field"></div>
+        </label>
+        <label>
+            <span>CVC</span>
+            <div #cardCvc class="field"></div>
+        </label>
+    </div>
+    <div class="success alert alert-success" *ngIf='token'>
+        <p>Card accepted successfully!</p>
+    </div>
+    <div class="outcome">
+        <div *ngIf='error' class="error">
+            {{error}}
+        </div>
+    </div>
+    <button (click) ='onSubmit()' [disabled]='!isCardValid()'type="button">Submit, You will be not charged yet!</button>
+    
+</form>

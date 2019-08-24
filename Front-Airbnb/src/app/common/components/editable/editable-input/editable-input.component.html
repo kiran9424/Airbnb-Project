@@ -1,0 +1,20 @@
+<div class="editable-component" [ngStyle]="style">
+    <input type="type" *ngIf="isActiveInput" [(ngModel)]="entity[entityField]" class="{{className}}"
+    (keydown.escape)="onCancel()"
+    (keyup.enter)="onSave()">
+    <span *ngIf="!isActiveInput" class="{{className}}inline">
+        {{entity[entityField]}}
+    </span>
+
+    <div class="inline">
+        <button *ngIf="!isActiveInput" class="btn btn-sm  btn-warning btn-editable" (click)="isActiveInput = true">
+            Edit</button>
+
+
+        <button *ngIf="isActiveInput" class="btn btn-sm  btn-success btn-editable" (click)="onSave()">
+            Save</button>
+
+        <button *ngIf="isActiveInput" class="btn btn-sm  btn-danger btn-editable" (click)="onCancel()">
+            Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<section id="rentalDetails" *ngIf="rental">
+
+  <div class="upper-section">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{rental.image}}" alt="">
+      </div>
+      <div class="col-md-6">
+        <!-- Will be replaced with map !!!! -->
+        <app-map
+        [locationSubject] ="locationSubject" 
+        [location]="rental.city + ', ' + rental.street"></app-map>
+      </div>
+    </div>
+  </div>
+
+  <div class="details-section">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="rental">
+          <h2 class="rental-type {{rental.category}}">Shared
+              <app-editable-select [(entity)]="rental" [field]="'shared'" [className]="'rental-shared '"
+              (editRental)="updateRental(rental._id,$event)"
+              [options]="[true,false]"
+              [style]="{'display':'inline-block'}">
+            </app-editable-select>
+
+
+            <app-editable-select [(entity)]="rental" [field]="'category'" [className]="'rental-category '"
+              (editRental)="updateRental(rental._id,$event)"
+              [options]="rentalCategories">
+            </app-editable-select>
+          </h2>
+          <div class="rental-owner">
+            <img src="https://api.adorable.io/avatars/285/abott@adorable.png " alt="img">
+            <span>{{rental.user.username}}</span>
+          </div>
+          <!-- <h1 class="rental-title">{{rental.title}}</h1> -->
+          <app-editable-input [(entity)]="rental" [field]="'title'" [className]="'rental-title '"
+            (editRental)="updateRental(rental._id,$event)">
+          </app-editable-input>
+
+          <app-editable-input [(entity)]="rental" [field]="'city'" [className]="'rental-city '"
+            (editRental)="updateRental(rental._id,$event)">
+          </app-editable-input>
+
+          <app-editable-input [(entity)]="rental" [field]="'street'" [className]="'rental-street '"
+            (editRental)="updateRental(rental._id,$event)">
+          </app-editable-input>
+          <!-- <h2 class="rental-city">{{rental.city | ucwords}}</h2> -->
+          <div class="rental-room-info">
+            <span><i class="fa fa-building">
+              </i>
+              <app-editable-input [(entity)]="rental" [field]="'bedrooms'" [className]="'rental-bedrooms '"
+                [type]="'number'" [style]="{'display':'inline-block'}" (editRental)="updateRental(rental._id,$event)">
+              </app-editable-input> bedrooms
+            </span>
+            <span><i class="fa fa-user"></i>{{contBedroomassets(4)}}  guests</span>
+            <span><i class="fa fa-bed"></i>{{contBedroomassets(4)}}  beds</span>
+          </div>
+          <p class="rental-description">
+            <app-editable-textarea [(entity)]="rental" [field]="'description'" [className]="'rental-description '"
+              [type]="'number'" [rows]="'6'" [cols]="'50'" [style]="{'display':'inline-block'}"
+              (editRental)="updateRental(rental._id,$event)">
+            </app-editable-textarea>
+          </p>
+          <hr>
+          <div class="rental-assets">
+            <h3 class="title">Assets</h3>
+            <div class="row">
+              <div class="col-md-6">
+                <span><i class="fa fa-asterisk"></i> Cooling</span>
+                <span><i class="fa fa-thermometer"></i> Heating</span>
+                <span><i class="fa fa-location-arrow"></i> Iron</span>
+              </div>
+              <div class="col-md-6">
+                <span><i class="fa fa-desktop"></i> Working area</span>
+                <span><i class="fa fa-cube"></i> Washing machine</span>
+                <span><i class="fa fa-cube"></i> Dishwasher</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"> BOOKING
+        <app-rental-detail-booking [rental]="rental"></app-rental-detail-booking>
+      </div>
+    </div>
+  </div>
+</section>

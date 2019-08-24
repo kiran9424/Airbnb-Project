@@ -1,0 +1,129 @@
+<section id="newRental">
+        <div class="bwm-form">
+          <div class="row">
+            <div class="col-md-5">
+                <div *ngIf="errors.length>0" class="alert alert-danger">
+                    <p *ngFor="let error of errors">
+                        {{error.detail}}
+                    </p>
+                </div>
+              <h1 class="page-title">Create Rental</h1>
+              <form #rentalForm="ngForm">
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input type="text"
+                         class="form-control"
+                         id="title"
+                         name="title"
+                          #title ="ngModel"
+                          [(ngModel)]="newRental.title"
+                          required>
+                </div>
+      
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text"
+                         class="form-control"
+                         id="city"
+                         name="city"
+                          #city ="ngModel"
+                          [(ngModel)]="newRental.city" 
+                          required>
+                </div>
+      
+                <div class="form-group">
+                  <label for="street">Street</label>
+                  <input type="text"
+                         class="form-control"
+                         id="street" 
+                         name="street"
+                         #street ="ngModel"
+                         [(ngModel)]="newRental.street" 
+                         required>
+                </div>
+      
+                <div class="form-group">
+                  <label for="city">Category</label>
+      
+                  <select class="form-control"
+                          id="city"
+                          name="category"
+                          #category ="ngModel"
+                          [(ngModel)]="newRental.category" 
+                          required>
+                    <option *ngFor="let category of rentalCategory"> {{category}} </option>
+                    
+                  </select>
+                </div>
+      
+                <div class="form-group">
+                  <label for="image">Image</label>
+                  <input type="file"
+                         name="image"
+                         class="form-control"
+                         id="image"
+                         placeholder="Upload file..."
+                         (change)="changeImageHandler()">
+                </div>
+      
+                <div class="form-group">
+                  <label for="bedrooms">Bedrooms</label>
+                  <input type="number"
+                         class="form-control"
+                         id="bedrooms"
+                         name="bedrooms"
+                         #bedrooms ="ngModel"
+                         [(ngModel)]="newRental.bedrooms" 
+                         required>
+                </div>
+      
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea rows="5"
+                            type="text"
+                            class="form-control"
+                            id="description"
+                            name="description"
+                            #description ="ngModel"
+                            [(ngModel)]="newRental.description" 
+                            required>
+                  </textarea>
+                </div>
+      
+                <div class="form-group">
+                  <label for="dailyRate">Daily Rate</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">$</div>
+                    </div>
+                    <input type="number"
+                           name="dailyRate"
+                           class="form-control"
+                           id="dailyRate"
+                           name="dailyRate"
+                           #dailyRate ="ngModel"
+                           [(ngModel)]="newRental.dailyRate" 
+                           required>
+                  </div>
+                </div>
+      
+                <div class="form-group">
+                  <label for="shared">Shared</label>
+                  <input type="checkbox"
+                         class="form-control"
+                         id="shared"
+                         name="shared">
+                </div>
+                <button [disabled]="!rentalForm.form.valid" type="submit" class="btn btn-bwm"(click)="createRental()">Submit</button>
+              </form>
+            </div>  
+            <div class="col-md-6 ml-auto">
+              <div class="image-container">
+                <h2 class="catchphrase">Hundreds of awesome places in reach of few clicks.</h2>
+                <img src="assets/images/create-rental.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      

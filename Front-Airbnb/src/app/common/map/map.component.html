@@ -1,0 +1,18 @@
+
+  <agm-map (mapready)="mapReadyHandler()" [latitude]="lat" [longitude]="lng"[zoom]="13">
+    <agm-circle *ngIf ="!isPostionError && lat && lng"
+     [latitude]="lat" 
+     [longitude]="lng"
+     [radius]="800"
+     [fillColor]="'#F44336'"
+     [fillOpacity]="0.4">
+    </agm-circle>
+  </agm-map>
+
+  <agm-info-window  *ngIf="isPostionError"
+  [latitude]="0" 
+  [longitude]="0"
+  [maxWidth]="300"
+  [isOpen]="true">
+  Oops!!! can't able to locate the location</agm-info-window>
+  
